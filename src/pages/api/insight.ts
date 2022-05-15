@@ -8,10 +8,17 @@ const key = process.env.PAGESPEED_INSIGHT_KEY
 
 type Props = types.api.Response | types.api.ErrorResponse
 
+const config = {
+  headers: {
+    Referer: `${process.env.NEXT_PUBLIC_DEPLOYMENT_URL}`,
+  },
+}
+
 const getData = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const data = await http.get<Props>(
-      `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${req.query.url}&strategy=${req.query.strategy}&key=${key}`
+      `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${req.query.url}&strategy=${req.query.strategy}&key=${key}`,
+      config
     )
     return res.status(200).json(data.data)
   } catch (e) {
