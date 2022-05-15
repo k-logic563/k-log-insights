@@ -10,8 +10,15 @@ type Props = types.api.Response | types.api.ErrorResponse
 
 const getData = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
+    const referer = `${req.headers.referer}`
     const data = await http.get<Props>(
-      `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${req.query.url}&strategy=${req.query.strategy}&key=${key}`)
+      `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${req.query.url}&strategy=${req.query.strategy}&key=${key}`,
+      {
+        headers: {
+          Referer: referer,
+        },
+      }
+    )
     return res.status(200).json(data.data)
   } catch (e) {
     if (e instanceof AxiosError) {
