@@ -8,17 +8,10 @@ const key = process.env.PAGESPEED_INSIGHT_KEY
 
 type Props = types.api.Response | types.api.ErrorResponse
 
-const config = {
-  headers: {
-    Referer: 'https://k-log-insights.vercel.app/',
-  },
-}
-
 const getData = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const data = await http.get<Props>(
-      `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${req.query.url}&strategy=${req.query.strategy}&key=${key}`,
-      config
+      `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${req.query.url}&strategy=${req.query.strategy}&key=${key}`
     )
     return res.status(200).json(data.data)
   } catch (e) {

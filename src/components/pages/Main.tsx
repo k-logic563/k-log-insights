@@ -10,6 +10,8 @@ import * as types from '@/types'
 
 type Props = types.api.Response | types.api.ErrorResponse
 
+const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+
 const Main: React.FC = () => {
   const [progressRate, setProgressRate] = useState(0)
   const [loading, setLoading] = useState(false)
@@ -54,6 +56,8 @@ const Main: React.FC = () => {
       return x.reason.response
     })
     setResult(formatRes)
+    // 処理後余裕を持たせて100%表示をさせる
+    await wait(1000)
     setLoading(false)
   }
 
