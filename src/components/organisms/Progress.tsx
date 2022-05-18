@@ -6,7 +6,7 @@ type Props = {
 }
 
 const Progress: React.FC<Props> = ({ now }) => (
-  <div className="text-center py-5">
+  <div className="text-center py-5" data-testid="progress">
     <p>Now loading...</p>
     <ProgressBar animated now={now} label={`${now}%`} />
   </div>

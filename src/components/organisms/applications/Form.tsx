@@ -37,7 +37,7 @@ const Form: React.FC = () => {
       <div className="mb-5">
         <div className="row g-3">
           {fields.map((field, idx) => (
-            <div className="col-4" key={field.id}>
+            <div className="col-4" key={field.id} data-testid="form-input-box">
               <div className="d-flex gap-2">
                 <input
                   {...register(`items.${idx}.url` as const, {
@@ -47,26 +47,26 @@ const Form: React.FC = () => {
                       message: '※URLフォーマットを確認してください',
                     },
                   })}
-                  data-cy={`input_${idx}`}
                   type="text"
                   className="form-control"
                   defaultValue={field.url}
+                  data-testid={`form-input-${idx}`}
                 />
                 <button
                   type="button"
                   style={{ whiteSpace: 'nowrap' }}
                   className="btn btn-danger"
                   onClick={() => remove(idx)}
-                  data-cy={`delete_${idx}`}
+                  data-testid={`delete-btn-${idx}`}
                 >
                   削除
                 </button>
               </div>
               {errors.items && errors.items[idx]?.url && (
                 <p
-                  data-cy={`error_${idx}`}
                   className="text-danger mt-1"
                   style={{ fontSize: '12px' }}
+                  data-testid={`error-text-${idx}`}
                 >
                   {errors.items[idx].url?.message}
                 </p>
@@ -79,12 +79,12 @@ const Form: React.FC = () => {
         <button
           type="button"
           className="btn btn-outline-primary"
-          data-cy="add"
           onClick={() =>
             append({
               url: '',
             })
           }
+          data-testid="add-input"
         >
           追加
         </button>
@@ -92,7 +92,7 @@ const Form: React.FC = () => {
           type="submit"
           className="btn btn-primary"
           disabled={!isValid || !fields.length}
-          data-cy="submit"
+          data-testid="submit"
         >
           分析
         </button>
