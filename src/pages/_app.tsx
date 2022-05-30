@@ -5,7 +5,7 @@ import Head from 'next/head'
 import { Layout } from '@/layout/default'
 
 import 'bootstrap/dist/css/bootstrap.css'
-import '@/styles/global.css"
+import '@/styles/global.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
