@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen, fireEvent, act, cleanup } from '@testing-library/react'
 
-import HomePage from '../pages'
+import HomePage from '@/pages'
 
 beforeEach(async () => {
   await act(() => {
@@ -14,7 +14,7 @@ afterEach(() => {
 })
 
 describe('フォームテスト', () => {
-  it('インプット増減', async () => {
+  it('インプット数の整合性', async () => {
     const testAddButton = screen.getByTestId('add-input')
     await act(() => {
       fireEvent.click(testAddButton)
@@ -28,7 +28,7 @@ describe('フォームテスト', () => {
     expect(screen.getAllByTestId('form-input-box').length).toBe(1)
   })
 
-  it('エラー表示', async () => {
+  it('URLフォーマットエラー表示', async () => {
     const testAddButton = screen.getByTestId('add-input')
 
     await act(() => {
@@ -55,32 +55,28 @@ describe('フォームテスト', () => {
     expect(screen.getByTestId('error-text-0').textContent).toBe('※必須項目です')
   })
 
-  it('各インプットに応じたエラー表示テスト', async () => {
+  it('必須項目エラー表示', async () => {
     const testAddButton = screen.getByTestId('add-input')
 
     await act(() => {
       fireEvent.click(testAddButton)
-      fireEvent.click(testAddButton)
     })
 
     await act(() => {
-      fireEvent.change(screen.getByTestId('form-input-1'), {
+      fireEvent.change(screen.getByTestId('form-input-0'), {
         target: {
           value: 'https://example',
         },
       })
     })
-    expect(screen.getByTestId('error-text-1').textContent).toBe(
-      '※URLフォーマットを確認してください'
-    )
 
     await act(() => {
-      fireEvent.change(screen.getByTestId('form-input-1'), {
+      fireEvent.change(screen.getByTestId('form-input-0'), {
         target: {
           value: '',
         },
       })
     })
-    expect(screen.getByTestId('error-text-1').textContent).toBe('※必須項目です')
+    expect(screen.getByTestId('error-text-0').textContent).toBe('※必須項目です')
   })
 })

@@ -94,5 +94,6 @@ export const getColor = (key: string, value: number) => {
 }
 
 export const convertToKiB = (value: number) => {
-  return Math.round((value / 1000) * 10) / 10
+  const kb = 1024
+  return Math.floor((value / kb) * 100) / 100
 }
