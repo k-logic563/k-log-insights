@@ -1,4 +1,5 @@
-import { Color, convertToKiB, getColor, hex2rgba } from '@/utils/displayUtils'
+import { Color, getColor } from '@/utils/color'
+import { convertToKiB, hex2rgba } from '@/utils/converter'
 
 describe('ユーティリティ関数単体テスト', () => {
   it('kb変換', () => {

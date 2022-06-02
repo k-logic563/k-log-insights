@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 
-import { Color } from '@/utils/displayUtils'
+import { Color } from '@/utils/color'
 
 export const list = css`
   list-style: none;

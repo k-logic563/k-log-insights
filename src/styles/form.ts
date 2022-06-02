@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { hex2rgba } from '@/utils/displayUtils'
+import { hex2rgba } from '@/utils/converter'
 
 export const navWrap = css`
   width: 250px;

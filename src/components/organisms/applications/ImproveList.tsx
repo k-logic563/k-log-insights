@@ -3,7 +3,7 @@ import { Accordion, Table, Image } from 'react-bootstrap'
 
 import * as types from '@/types'
 import { improveProps } from '@/constants'
-import { convertToKiB } from '@/utils/displayUtils'
+import { convertToKiB } from '@/utils/converter'
 
 type Props = {
   results: types.api.Response

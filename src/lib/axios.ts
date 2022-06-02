@@ -1,12 +1,12 @@
-import axios, { AxiosResponse } from 'axios'
+import Axios, { AxiosResponse } from 'axios'
 
-import { getColor } from '@/utils/displayUtils'
+import { getColor } from '@/utils/color'
 import * as types from '@/types'
 import * as constants from '@/constants'
 
-const http = axios.create()
+export const axios = Axios.create()
 
-http.interceptors.response.use(
+axios.interceptors.response.use(
   (response: AxiosResponse<types.api.Response['data']>) => {
     const data = response.data.lighthouseResult.audits
     // set colors
@@ -35,5 +35,3 @@ http.interceptors.response.use(
     return response
   }
 )
-
-export { http }
