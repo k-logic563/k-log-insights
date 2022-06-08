@@ -50,6 +50,9 @@ export const AppForm: React.FC = () => {
                   })}
                   defaultValue={field.url}
                 />
+                <span className="text-danger" style={{ fontSize: '12px' }}>
+                  {errors.items && errors.items[idx].url?.message}
+                </span>
                 <AppButton
                   variant="danger"
                   text="削除"
