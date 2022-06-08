@@ -4,7 +4,7 @@ import { Form } from 'react-bootstrap'
 
 import { AppButton } from '@/components/atoms/AppButton'
 
-import { strategies, urlRegex } from '@/constants'
+import { STRATEGIES, URL_REGEX } from '@/constants'
 import * as types from '@/types'
 
 export const AppForm: React.FC = () => {
@@ -22,7 +22,7 @@ export const AppForm: React.FC = () => {
   return (
     <>
       <div className="mb-3">
-        {strategies.map((x) => (
+        {STRATEGIES.map((x) => (
           <div className="form-check" key={x.id}>
             <Form.Check
               {...register('strategy')}
@@ -44,7 +44,7 @@ export const AppForm: React.FC = () => {
                   {...register(`items.${idx}.url` as const, {
                     required: '※必須項目です',
                     pattern: {
-                      value: urlRegex,
+                      value: URL_REGEX,
                       message: '※URLフォーマットを確認してください',
                     },
                   })}
@@ -57,11 +57,6 @@ export const AppForm: React.FC = () => {
                   handleClick={() => remove(idx)}
                 />
               </div>
-              {errors.items && errors.items[idx]?.url && (
-                <span className="text-danger" style={{ fontSize: '12px' }}>
-                  {errors.items[idx].url?.message}
-                </span>
-              )}
             </div>
           ))}
         </div>

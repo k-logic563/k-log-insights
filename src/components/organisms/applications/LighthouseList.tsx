@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { lighthouseItems } from '@/constants'
+import { LIGHTHOUSE_ITEMS } from '@/constants'
 
 import * as types from '@/types'
 import * as styles from '@/styles'
@@ -12,7 +12,7 @@ type Props = {
 const LighthouseList: React.FC<Props> = ({ lighthouseResult }) => {
   return (
     <ul css={styles.content.list}>
-      {lighthouseItems.map((x, i) => (
+      {LIGHTHOUSE_ITEMS.map((x, i) => (
         <li key={i}>
           <h3
             css={styles.content.listTitle(

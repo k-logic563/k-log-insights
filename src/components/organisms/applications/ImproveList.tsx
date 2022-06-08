@@ -2,7 +2,7 @@ import React from 'react'
 import { Accordion, Table, Image } from 'react-bootstrap'
 
 import * as types from '@/types'
-import { improveProps } from '@/constants'
+import { IMPROVE_PROPS } from '@/constants'
 import { convertToKiB } from '@/utils/converter'
 
 type Props = {
@@ -15,7 +15,7 @@ const ImproveList: React.FC<Props> = ({ results }) => {
   return (
     <>
       <Accordion defaultActiveKey={null}>
-        {improveProps.map((x, idx) => (
+        {IMPROVE_PROPS.map((x, idx) => (
           <div key={x}>
             {!!audits[x].details.items.length && (
               <Accordion.Item eventKey={`${idx}`}>

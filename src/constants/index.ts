@@ -1,6 +1,6 @@
 import { SProps } from '../types/form'
 
-export const lighthouseItems = [
+export const LIGHTHOUSE_ITEMS = [
   {
     title: 'First Contentful Paint',
     prop: 'first-contentful-paint',
@@ -27,9 +27,9 @@ export const lighthouseItems = [
   },
 ] as const
 
-export const lighthouseKeys = lighthouseItems.map((x) => x.prop)
+export const LIGHTHOUSE_KEYS = LIGHTHOUSE_ITEMS.map((x) => x.prop)
 
-export const strategies: SProps[] = [
+export const STRATEGIES: SProps[] = [
   {
     id: 'desktop',
     label: 'デスクトップ',
@@ -40,9 +40,9 @@ export const strategies: SProps[] = [
   },
 ]
 
-export const urlRegex = /^(http|https)(:\/\/[\w\/:%#\$&\?\(\)~\.=\+\-]+)\..+$/
+export const URL_REGEX = /^(http|https)(:\/\/[\w\/:%#\$&\?\(\)~\.=\+\-]+)\..+$/
 
-export const improveProps = [
+export const IMPROVE_PROPS = [
   'modern-image-formats',
   'uses-responsive-images',
   'offscreen-images',

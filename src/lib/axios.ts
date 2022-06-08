@@ -10,7 +10,7 @@ axios.interceptors.response.use(
   (response: AxiosResponse<types.api.Response['data']>) => {
     const data = response.data.lighthouseResult.audits
     // set colors
-    constants.lighthouseKeys.forEach((x) => {
+    constants.LIGHTHOUSE_KEYS.forEach((x) => {
       let targetScore = 0
       targetScore = data[x].numericValue / 1000
       if (x === 'cumulative-layout-shift') {
