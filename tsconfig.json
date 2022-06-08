@@ -15,7 +15,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": false,
+    "isolatedModules": true,
     "jsx": "preserve",
     "jsxImportSource": "@emotion/react",
     "incremental": true,
@@ -32,7 +32,7 @@
       "@emotion/react/types/css-prop",
       "jest",
       "node",
-      "@testing-library/jest-dom",
+      "@testing-library/jest-dom"
     ]
   },
   "include": [

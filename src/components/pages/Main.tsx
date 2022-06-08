@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { useFormContext } from 'react-hook-form'
+import { useForm, FormProvider } from 'react-hook-form'
+import { Form } from 'react-bootstrap'
 import axios from 'axios'
 
-import Form from '@/components/organisms/applications/Form'
+import { AppForm } from '@/components/organisms/applications/AppForm'
 import Result from '@/components/organisms/applications/Result'
 import Progress from '@/components/organisms/Progress'
 
@@ -13,10 +14,16 @@ import * as types from '@/types'
 export type Props = types.api.Response | types.api.ErrorResponse
 
 const Main: React.FC = () => {
+  const methods = useForm<types.form.FormValues>({
+    defaultValues: {
+      strategy: 'desktop',
+      items: [],
+    },
+    mode: 'onChange',
+  })
   const [loading, setLoading] = useState(false)
   const [urls, setUrls] = useState<string[]>([])
   const [results, setResult] = useState<Props[]>([])
-  const { handleSubmit } = useFormContext<types.form.FormValues>()
   const { progressRate, setProgressRate, progressPromise } = useProgress()
 
   const onSubmit = async (data: types.form.FormValues) => {
@@ -50,9 +57,11 @@ const Main: React.FC = () => {
     <>
       <div className="py-5 bg-white">
         <div className="container">
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <Form />
-          </form>
+          <FormProvider {...methods}>
+            <Form onSubmit={methods.handleSubmit(onSubmit)}>
+              <AppForm />
+            </Form>
+          </FormProvider>
         </div>
       </div>
       {results.length !== 0 && (

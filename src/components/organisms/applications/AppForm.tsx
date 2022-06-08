@@ -1,15 +1,19 @@
 import React from 'react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
+import { Form } from 'react-bootstrap'
+
+import { AppButton } from '@/components/atoms/AppButton'
 
 import { strategies, urlRegex } from '@/constants'
 import * as types from '@/types'
 
-const Form: React.FC = () => {
+export const AppForm: React.FC = () => {
   const {
     register,
     control,
     formState: { errors, isValid },
   } = useFormContext<types.form.FormValues>()
+
   const { fields, remove, append } = useFieldArray({
     name: 'items',
     control,
@@ -20,26 +24,23 @@ const Form: React.FC = () => {
       <div className="mb-3">
         {strategies.map((x) => (
           <div className="form-check" key={x.id}>
-            <input
+            <Form.Check
               {...register('strategy')}
-              className="form-check-input"
               type="radio"
               name="strategy"
               defaultValue={x.id}
               id={x.id}
+              label={x.label}
             />
-            <label className="form-check-label" htmlFor={x.id}>
-              {x.label}
-            </label>
           </div>
         ))}
       </div>
       <div className="mb-5">
         <div className="row g-3">
           {fields.map((field, idx) => (
-            <div className="col-4" key={field.id} data-testid="form-input-box">
+            <div className="col-4" key={field.id}>
               <div className="d-flex gap-2">
-                <input
+                <Form.Control
                   {...register(`items.${idx}.url` as const, {
                     required: '※必須項目です',
                     pattern: {
@@ -47,58 +48,41 @@ const Form: React.FC = () => {
                       message: '※URLフォーマットを確認してください',
                     },
                   })}
-                  type="text"
-                  className="form-control"
                   defaultValue={field.url}
-                  data-testid={`form-input-${idx}`}
                 />
-                <button
-                  type="button"
-                  style={{ whiteSpace: 'nowrap' }}
-                  className="btn btn-danger"
-                  onClick={() => remove(idx)}
-                  data-testid={`delete-btn-${idx}`}
-                >
-                  削除
-                </button>
+                <AppButton
+                  variant="danger"
+                  text="削除"
+                  inputClass="text-nowrap"
+                  handleClick={() => remove(idx)}
+                />
               </div>
               {errors.items && errors.items[idx]?.url && (
-                <p
-                  className="text-danger mt-1"
-                  style={{ fontSize: '12px' }}
-                  data-testid={`error-text-${idx}`}
-                >
+                <span className="text-danger" style={{ fontSize: '12px' }}>
                   {errors.items[idx].url?.message}
-                </p>
+                </span>
               )}
             </div>
           ))}
         </div>
       </div>
       <div className="d-flex justify-content-center gap-3">
-        <button
-          type="button"
-          className="btn btn-outline-primary"
-          onClick={() =>
+        <AppButton
+          variant="outline-primary"
+          text="追加"
+          handleClick={() =>
             append({
               url: '',
             })
           }
-          data-testid="add-input"
-        >
-          追加
-        </button>
-        <button
+        />
+        <AppButton
           type="submit"
-          className="btn btn-primary"
+          variant="primary"
+          text="分析"
           disabled={!isValid || !fields.length}
-          data-testid="submit"
-        >
-          分析
-        </button>
+        />
       </div>
     </>
   )
 }
-
-export default Form
