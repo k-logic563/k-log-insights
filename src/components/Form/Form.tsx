@@ -1,16 +1,22 @@
 import React from 'react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
-import { Form } from 'react-bootstrap'
+import { Form as RBForm } from 'react-bootstrap'
 
-import { AppButton } from '@/components/atoms/AppButton'
+import { Button } from '@/components/Elements/Button'
+import { InputField } from './FormInput'
 
 import { STRATEGIES, URL_REGEX } from '@/constants'
 import * as types from '@/types'
 
-export const AppForm: React.FC = () => {
+type Props = {
+  onSubmit: (data: types.form.FormValues) => void
+}
+
+export const Form: React.FC<Props> = ({ onSubmit }) => {
   const {
     register,
     control,
+    handleSubmit,
     formState: { errors, isValid },
   } = useFormContext<types.form.FormValues>()
 
@@ -20,11 +26,11 @@ export const AppForm: React.FC = () => {
   })
 
   return (
-    <>
+    <RBForm onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-3">
         {STRATEGIES.map((x) => (
           <div className="form-check" key={x.id}>
-            <Form.Check
+            <RBForm.Check
               {...register('strategy')}
               type="radio"
               name="strategy"
@@ -39,33 +45,24 @@ export const AppForm: React.FC = () => {
         <div className="row g-3">
           {fields.map((field, idx) => (
             <div className="col-4" key={field.id}>
-              <div className="d-flex gap-2">
-                <Form.Control
-                  {...register(`items.${idx}.url` as const, {
-                    required: '※必須項目です',
-                    pattern: {
-                      value: URL_REGEX,
-                      message: '※URLフォーマットを確認してください',
-                    },
-                  })}
-                  defaultValue={field.url}
-                />
-                <span className="text-danger" style={{ fontSize: '12px' }}>
-                  {errors.items && errors.items[idx].url?.message}
-                </span>
-                <AppButton
-                  variant="danger"
-                  text="削除"
-                  inputClass="text-nowrap"
-                  handleClick={() => remove(idx)}
-                />
-              </div>
+              <InputField
+                defaultValue={field.url}
+                registration={register(`items.${idx}.url` as const, {
+                  required: '※必須項目です',
+                  pattern: {
+                    value: URL_REGEX,
+                    message: '※URLフォーマットを確認してください',
+                  },
+                })}
+                handleClickRemove={() => remove(idx)}
+                error={errors.items && errors.items[idx]?.url}
+              />
             </div>
           ))}
         </div>
       </div>
       <div className="d-flex justify-content-center gap-3">
-        <AppButton
+        <Button
           variant="outline-primary"
           text="追加"
           handleClick={() =>
@@ -74,13 +71,13 @@ export const AppForm: React.FC = () => {
             })
           }
         />
-        <AppButton
+        <Button
           type="submit"
           variant="primary"
           text="分析"
           disabled={!isValid || !fields.length}
         />
       </div>
-    </>
+    </RBForm>
   )
 }

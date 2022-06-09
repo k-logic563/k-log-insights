@@ -1,16 +1,17 @@
 import React from 'react'
 
+import LighthouseList from './LighthouseList'
+import ImproveList from './ImproveList'
+
 import * as types from '@/types'
 import * as styles from '@/styles'
-import LighthouseList from '@/components/organisms/applications/LighthouseList'
-import ImproveList from '@/components/organisms/applications/ImproveList'
 
 type Props = {
   results: (types.api.Response | types.api.ErrorResponse)[]
   urls: string[]
 }
 
-const Result: React.FC<Props> = ({ results, urls }) => (
+export const Result: React.FC<Props> = ({ results, urls }) => (
   <div className="d-flex align-items-start gap-5">
     <nav css={styles.form.navWrap} className="sticky-top">
       <ul className="list-group">
@@ -55,5 +56,3 @@ const Result: React.FC<Props> = ({ results, urls }) => (
     </div>
   </div>
 )
-
-export default Result

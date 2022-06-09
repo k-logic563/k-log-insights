@@ -2,19 +2,19 @@ import React from 'react'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 
-import { Layout } from '@/layout/default'
+import { MainLayout } from '@/components/Layout'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import '@/styles/global.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Layout>
+    <MainLayout>
       <Head>
         <title>k-log-insights</title>
       </Head>
       <Component {...pageProps} />
-    </Layout>
+    </MainLayout>
   )
 }
 

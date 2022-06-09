@@ -1,8 +1,8 @@
 import React from 'react'
-import { Button } from 'react-bootstrap'
+import { Button as RBButton } from 'react-bootstrap'
 
 type Props = {
-  variant: 'primary' | 'danger' | 'outline-primary'
+  variant: string
   text: string
   type?: 'button' | 'submit'
   handleClick?: () => void
@@ -10,7 +10,7 @@ type Props = {
   inputClass?: string
 }
 
-export const AppButton: React.FC<Props> = ({
+export const Button: React.FC<Props> = ({
   variant,
   type = 'button',
   handleClick,
@@ -19,7 +19,7 @@ export const AppButton: React.FC<Props> = ({
   inputClass,
 }) => {
   return (
-    <Button
+    <RBButton
       className={inputClass}
       type={type}
       variant={variant}
@@ -27,6 +27,6 @@ export const AppButton: React.FC<Props> = ({
       disabled={disabled}
     >
       {text}
-    </Button>
+    </RBButton>
   )
 }

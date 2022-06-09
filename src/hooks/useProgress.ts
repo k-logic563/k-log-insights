@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { AxiosResponse } from 'axios'
 
-import { Props } from '@/components/pages/Main'
+import { Props } from '@/pages'
 
 export const useProgress = () => {
   const [progressRate, setProgressRate] = useState(0)
