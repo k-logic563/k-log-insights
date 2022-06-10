@@ -1,27 +1,22 @@
 import React, { useState } from 'react'
 import { NextPage } from 'next'
-import { useForm, FormProvider } from 'react-hook-form'
 import axios from 'axios'
 
-import { Form } from '@/components/Form'
+import { InputField } from '@/components/Form'
 import { Result } from '@/components/List'
 import Progress from '@/components/Elements/Progress/Progress'
+import { Form } from '@/components/Form'
 
 import { useProgress } from '@/hooks/useProgress'
 import { wait } from '@/utils/wait'
 import * as types from '@/types'
+import { STRATEGIES, URL_REGEX } from '@/constants'
+import { Form as RBForm } from 'react-bootstrap'
+import { Button } from '@/components/Elements/Button'
 
 export type Props = types.api.Response | types.api.ErrorResponse
 
 const Home: NextPage = () => {
-  const methods = useForm<types.form.FormValues>({
-    defaultValues: {
-      strategy: 'desktop',
-      items: [],
-    },
-    mode: 'onChange',
-  })
-
   const [loading, setLoading] = useState(false)
   const [urls, setUrls] = useState<string[]>([])
   const [results, setResult] = useState<Props[]>([])
@@ -58,9 +53,76 @@ const Home: NextPage = () => {
     <>
       <div className="py-5 bg-white">
         <div className="container">
-          <FormProvider {...methods}>
-            <Form onSubmit={onSubmit} />
-          </FormProvider>
+          <Form<types.form.FormValues>
+            options={{
+              defaultValues: {
+                strategy: 'desktop',
+                items: [],
+              },
+              mode: 'onChange',
+            }}
+            key='items'
+            onSubmit={onSubmit}
+          >
+            {({ register, formState, fields, remove, append }) => (
+              <>
+                <div className="mb-3">
+                  {STRATEGIES.map((x) => (
+                    <div className="form-check" key={x.id}>
+                      <RBForm.Check
+                        {...register('strategy')}
+                        type="radio"
+                        name="strategy"
+                        defaultValue={x.id}
+                        id={x.id}
+                        label={x.label}
+                      />
+                    </div>
+                  ))}
+                </div>
+                <div className="mb-5">
+                  <div className="row g-3">
+                    {fields.map((field, idx) => (
+                      <div className="col-4" key={field.id}>
+                        <InputField
+                          defaultValue={field.url}
+                          registration={register(`items.${idx}.url` as const, {
+                            required: '※必須項目です',
+                            pattern: {
+                              value: URL_REGEX,
+                              message: '※URLフォーマットを確認してください',
+                            },
+                          })}
+                          handleClickRemove={() => remove(idx)}
+                          error={
+                            formState.errors.items &&
+                            formState.errors.items[idx]?.url
+                          }
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="d-flex justify-content-center gap-3">
+                  <Button
+                    variant="outline-primary"
+                    text="追加"
+                    handleClick={() =>
+                      append({
+                        url: '',
+                      })
+                    }
+                  />
+                  <Button
+                    type="submit"
+                    variant="primary"
+                    text="分析"
+                    disabled={!formState.isValid || !fields.length}
+                  />
+                </div>
+              </>
+            )}
+          </Form>
         </div>
       </div>
       {results.length !== 0 && (
