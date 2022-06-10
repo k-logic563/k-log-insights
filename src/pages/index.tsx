@@ -16,6 +16,18 @@ import { Button } from '@/components/Elements/Button'
 
 export type Props = types.api.Response | types.api.ErrorResponse
 
+const options = {
+  defaultValues: {
+    strategy: 'desktop' as const,
+    items: [
+      {
+        url: '',
+      },
+    ],
+  },
+  mode: 'onSubmit' as const,
+}
+
 const Home: NextPage = () => {
   const [loading, setLoading] = useState(false)
   const [urls, setUrls] = useState<string[]>([])
@@ -54,14 +66,8 @@ const Home: NextPage = () => {
       <div className="py-5 bg-white">
         <div className="container">
           <Form<types.form.FormValues>
-            options={{
-              defaultValues: {
-                strategy: 'desktop',
-                items: [],
-              },
-              mode: 'onChange',
-            }}
-            key='items'
+            options={options}
+            fieldName="items"
             onSubmit={onSubmit}
           >
             {({ register, formState, fields, remove, append }) => (
@@ -98,6 +104,7 @@ const Home: NextPage = () => {
                             formState.errors.items &&
                             formState.errors.items[idx]?.url
                           }
+                          fieldsCount={fields.length}
                         />
                       </div>
                     ))}
@@ -113,12 +120,7 @@ const Home: NextPage = () => {
                       })
                     }
                   />
-                  <Button
-                    type="submit"
-                    variant="primary"
-                    text="分析"
-                    disabled={!formState.isValid || !fields.length}
-                  />
+                  <Button type="submit" variant="primary" text="分析" />
                 </div>
               </>
             )}

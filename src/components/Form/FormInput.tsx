@@ -7,13 +7,14 @@ import { FieldWrapper, FieldWrapperPassThroughProps } from './FieldWrapper'
 
 type InputFieldProps = FieldWrapperPassThroughProps & {
   type?: 'text' | 'email' | 'password'
+  fieldsCount: number
   defaultValue: string
   handleClickRemove: () => void
   registration: Partial<UseFormRegisterReturn>
 }
 
 export const InputField = (props: InputFieldProps) => {
-  const { type = 'text', registration, error } = props
+  const { type = 'text', registration, error, fieldsCount } = props
   return (
     <div className="d-flex align-items-start gap-2">
       <div className="w-100">
@@ -25,12 +26,14 @@ export const InputField = (props: InputFieldProps) => {
           />
         </FieldWrapper>
       </div>
-      <Button
-        variant="danger"
-        text="削除"
-        inputClass="text-nowrap"
-        handleClick={props.handleClickRemove}
-      />
+      {fieldsCount !== 1 && (
+        <Button
+          variant="danger"
+          text="削除"
+          inputClass="text-nowrap"
+          handleClick={props.handleClickRemove}
+        />
+      )}
     </div>
   )
 }

@@ -6,7 +6,8 @@ import {
   SubmitHandler,
   UseFormProps,
   useFieldArray,
-  UseFieldArrayReturn, ArrayPath,
+  UseFieldArrayReturn,
+  ArrayPath,
 } from 'react-hook-form'
 
 type FormProps<TFormValues> = {
@@ -15,20 +16,20 @@ type FormProps<TFormValues> = {
   children: (
     props: UseFormReturn<TFormValues> & UseFieldArrayReturn<TFormValues>
   ) => React.ReactNode
-  key: ArrayPath<TFormValues>
+  fieldName: ArrayPath<TFormValues>
 }
 
 export const Form = <
-  TFormValues extends Record<string, unknown> = Record<string, unknown>,
+  TFormValues extends Record<string, unknown> = Record<string, unknown>
 >({
   onSubmit,
   options,
   children,
-  key,
+  fieldName,
 }: FormProps<TFormValues>) => {
   const methods = useForm<TFormValues>({ ...options })
   const fieldsArrayProps = useFieldArray({
-    name: key,
+    name: fieldName,
     control: methods.control,
   })
 

@@ -1,7 +1,7 @@
-import * as types from '@/types'
+export type Strategy = 'desktop' | 'mobile'
 
 export type SProps = {
-  id: types.form.Strategy
+  id: Strategy
   label: string
 }
 
@@ -10,8 +10,6 @@ export type Item = {
   url: string
   error?: string
 }
-
-export type Strategy = 'desktop' | 'mobile'
 
 export type FormValues = {
   strategy: Strategy
