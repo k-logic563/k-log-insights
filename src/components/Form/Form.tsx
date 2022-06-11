@@ -12,11 +12,11 @@ import {
 
 type FormProps<TFormValues> = {
   onSubmit: SubmitHandler<TFormValues>
-  options?: UseFormProps<TFormValues>
   children: (
     props: UseFormReturn<TFormValues> & UseFieldArrayReturn<TFormValues>
   ) => React.ReactNode
   fieldName: ArrayPath<TFormValues>
+  options?: UseFormProps<TFormValues>
 }
 
 export const Form = <
