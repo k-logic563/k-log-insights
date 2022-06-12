@@ -6,7 +6,7 @@ import * as types from '@/types'
 import * as styles from '@/styles'
 
 type Props = {
-  lighthouseResult: types.api.Response['data']['lighthouseResult']
+  lighthouseResult: types.api.SuccessResponse['data']['lighthouseResult']
 }
 
 const LighthouseList: React.FC<Props> = ({ lighthouseResult }) => {

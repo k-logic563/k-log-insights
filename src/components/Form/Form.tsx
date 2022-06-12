@@ -19,9 +19,7 @@ type FormProps<TFormValues> = {
   options?: UseFormProps<TFormValues>
 }
 
-export const Form = <
-  TFormValues extends Record<string, unknown> = Record<string, unknown>
->({
+export const Form = <TFormValues extends Record<string, unknown>>({
   onSubmit,
   options,
   children,

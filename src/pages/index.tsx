@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { NextPage } from 'next'
 import axios from 'axios'
 
@@ -13,8 +13,6 @@ import * as types from '@/types'
 import { STRATEGIES, URL_REGEX } from '@/constants'
 import { Form as RBForm } from 'react-bootstrap'
 import { Button } from '@/components/Elements/Button'
-
-export type Props = types.api.Response | types.api.ErrorResponse
 
 const options = {
   defaultValues: {
@@ -31,10 +29,11 @@ const options = {
 const Home: NextPage = () => {
   const [loading, setLoading] = useState(false)
   const [urls, setUrls] = useState<string[]>([])
-  const [results, setResult] = useState<Props[]>([])
-  const { progressRate, setProgressRate, progressPromise } = useProgress()
+  const [results, setResult] = useState<types.api.DataResponses[]>([])
+  const { progressRate, setProgressRate, progressPromise } =
+    useProgress<types.api.DataResponses>()
 
-  const onSubmit = async (data: types.form.FormValues) => {
+  const onSubmit = useCallback(async (data: types.form.FormValues) => {
     // 初期化処理
     results.length = 0
     setProgressRate(0)
@@ -43,7 +42,7 @@ const Home: NextPage = () => {
 
     // apiコール処理を配列に格納
     const promises = data.items.map((x) => {
-      return axios.get<Props>(
+      return axios.get(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/insight?url=${x.url}&strategy=${data.strategy}`
       )
     })
@@ -59,7 +58,7 @@ const Home: NextPage = () => {
     // 処理後余裕を持たせて100%表示をさせる
     await wait(1000)
     setLoading(false)
-  }
+  }, [])
 
   return !loading ? (
     <>

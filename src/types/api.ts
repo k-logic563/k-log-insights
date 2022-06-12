@@ -1,3 +1,5 @@
+import { AxiosResponse } from 'axios'
+
 type Contents = {
   score: number
   displayValue: string
@@ -25,38 +27,35 @@ type ImproveContents = {
   }
 }
 
-export type ErrorResponse = {
-  status: 500
-  data: {
-    error: {
-      code: number
-      message: string
+type DataProps = {
+  id: string
+  totalScore: number
+  totalScoreColor: string
+  lighthouseResult: {
+    audits: {
+      'first-contentful-paint': Contents
+      'cumulative-layout-shift': Contents
+      interactive: Contents
+      'speed-index': Contents
+      'total-blocking-time': Contents
+      'largest-contentful-paint': Contents
+      'modern-image-formats': ImproveContents
+      'uses-responsive-images': ImproveContents
+      'offscreen-images': ImproveContents
+      'unused-javascript': ImproveContents
+      'unused-css-rules': ImproveContents
+      'unminified-css': ImproveContents
+      'unminified-javascript': ImproveContents
     }
   }
 }
 
-export type Response = {
-  status: 200
-  data: {
-    id: string
-    totalScore: number
-    totalScoreColor: string
-    lighthouseResult: {
-      audits: {
-        'first-contentful-paint': Contents
-        'cumulative-layout-shift': Contents
-        interactive: Contents
-        'speed-index': Contents
-        'total-blocking-time': Contents
-        'largest-contentful-paint': Contents
-        'modern-image-formats': ImproveContents
-        'uses-responsive-images': ImproveContents
-        'offscreen-images': ImproveContents
-        'unused-javascript': ImproveContents
-        'unused-css-rules': ImproveContents
-        'unminified-css': ImproveContents
-        'unminified-javascript': ImproveContents
-      }
-    }
+type ErrorDataProps = {
+  error: {
+    message: string
   }
 }
+
+export type SuccessResponse = AxiosResponse<DataProps>
+export type ErrorResponse = AxiosResponse<ErrorDataProps>
+export type DataResponses = SuccessResponse | ErrorResponse

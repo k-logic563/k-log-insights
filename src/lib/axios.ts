@@ -7,7 +7,7 @@ import * as constants from '@/constants'
 export const axios = Axios.create()
 
 axios.interceptors.response.use(
-  (response: AxiosResponse<types.api.Response['data']>) => {
+  (response: AxiosResponse<types.api.SuccessResponse['data']>) => {
     const data = response.data.lighthouseResult.audits
     // set colors
     constants.LIGHTHOUSE_KEYS.forEach((x) => {

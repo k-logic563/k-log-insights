@@ -6,7 +6,7 @@ import { IMPROVE_PROPS } from '@/constants'
 import { convertToKiB } from '@/utils/converter'
 
 type Props = {
-  results: types.api.Response
+  results: types.api.SuccessResponse
 }
 
 const ImproveList: React.FC<Props> = ({ results }) => {

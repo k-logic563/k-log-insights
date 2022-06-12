@@ -6,11 +6,9 @@ import * as types from '@/types'
 
 const key = process.env.PAGESPEED_INSIGHT_KEY
 
-type Props = types.api.Response | types.api.ErrorResponse
-
 const getData = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const data = await axios.get<Props>(
+    const data = await axios.get<types.api.DataResponses>(
       `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${req.query.url}&strategy=${req.query.strategy}&key=${key}`,
       {
         headers: {

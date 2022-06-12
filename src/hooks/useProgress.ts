@@ -1,16 +1,14 @@
 import { useState } from 'react'
-import { AxiosResponse } from 'axios'
+import { AxiosResponse, AxiosError } from 'axios'
 
-import { Props } from '@/pages'
-
-export const useProgress = () => {
+export const useProgress = <T extends AxiosResponse | AxiosError>() => {
   const [progressRate, setProgressRate] = useState(0)
 
-  const progressPromise = (promises: Promise<AxiosResponse<Props>>[]) => {
+  const progressPromise = (promises: Promise<T>[]) => {
     const len = promises.length
     let progress = 0
 
-    function tick(promise: Promise<AxiosResponse<Props>>) {
+    function tick(promise: Promise<T>) {
       promise.then(() => {
         progress++
         setProgressRate(Math.round((progress / len) * 100))
