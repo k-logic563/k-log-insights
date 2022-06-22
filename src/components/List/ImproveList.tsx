@@ -2,6 +2,7 @@ import React from 'react'
 import { Accordion, Table, Image } from 'react-bootstrap'
 
 import * as types from '@/types'
+import * as styles from '@/styles'
 import { IMPROVE_PROPS } from '@/constants'
 import { convertToKiB } from '@/utils/converter'
 
@@ -21,7 +22,8 @@ const ImproveList: React.FC<Props> = ({ results }) => {
               <Accordion.Item eventKey={`${idx}`}>
                 <Accordion.Header>{audits[x].title}</Accordion.Header>
                 <Accordion.Body>
-                  <Table striped bordered hover>
+                  <p>{audits[x].description}</p>
+                  <Table css={styles.table.table} striped bordered hover>
                     <thead>
                       <tr>
                         {audits[x].details.headings.map((y, i) => (
@@ -41,8 +43,14 @@ const ImproveList: React.FC<Props> = ({ results }) => {
                             </td>
                           )}
                           <td>{y.url}</td>
-                          <td>{convertToKiB(y.totalBytes)}KiB</td>
-                          <td>{convertToKiB(y.wastedBytes)}KiB</td>
+                          {x === 'server-response-time' ? (
+                            <td>{convertToKiB(y.responseTime)}KiB</td>
+                          ) : (
+                            <>
+                              <td>{convertToKiB(y.totalBytes)}KiB</td>
+                              <td>{convertToKiB(y.wastedBytes)}KiB</td>
+                            </>
+                          )}
                         </tr>
                       ))}
                     </tbody>

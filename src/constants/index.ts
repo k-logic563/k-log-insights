@@ -43,6 +43,7 @@ export const STRATEGIES: SProps[] = [
 export const URL_REGEX = /^(http|https)(:\/\/[\w\/:%#\$&\?\(\)~\.=\+\-]+)\..+$/
 
 export const IMPROVE_PROPS = [
+  'server-response-time',
   'modern-image-formats',
   'uses-responsive-images',
   'offscreen-images',

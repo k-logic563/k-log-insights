@@ -2,6 +2,7 @@ import React from 'react'
 
 import LighthouseList from './LighthouseList'
 import ImproveList from './ImproveList'
+import Score from '../Elements/Score'
 
 import * as types from '@/types'
 import * as styles from '@/styles'
@@ -19,8 +20,8 @@ const isSuccessResponse = (
 
 export const Result: React.FC<Props> = ({ results, urls }) => {
   return (
-    <div className="d-flex align-items-start gap-5">
-      <nav css={styles.form.navWrap} className="sticky-top">
+    <div css={styles.layout.wrapper}>
+      <nav className="sticky-top">
         <ul className="list-group">
           {urls.map((x, i) => (
             <li className="list-group-item" key={i}>
@@ -31,10 +32,7 @@ export const Result: React.FC<Props> = ({ results, urls }) => {
           ))}
         </ul>
       </nav>
-      <div
-        css={styles.form.contentWrap}
-        className="py-5 px-4 bg-white rounded-3"
-      >
+      <div className="py-5 px-4 bg-white rounded-3">
         <div className="d-grid gap-5">
           {results.map((x, i) =>
             isSuccessResponse(x) ? (
@@ -43,9 +41,10 @@ export const Result: React.FC<Props> = ({ results, urls }) => {
                   <h2 className="pb-2 mb-5 border-bottom border-2">
                     {urls[i]}
                   </h2>
-                  <div css={styles.form.score(x.data.totalScoreColor)}>
-                    {x.data.totalScore}
-                  </div>
+                  <Score
+                    score={`${x.data.totalScore}`}
+                    color={x.data.totalScoreColor}
+                  />
                   <LighthouseList lighthouseResult={x.data.lighthouseResult} />
                 </section>
                 <section>

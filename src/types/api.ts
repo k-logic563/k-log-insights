@@ -8,16 +8,18 @@ type Contents = {
 }
 
 type ItemProps = {
-  totalBytes: number
-  wastedBytes: number
+  totalBytes?: number
+  wastedBytes?: number
   url: string
   node?: {
     selector: string
   }
+  responseTime?: number
 }
 
 type ImproveContents = {
   title: string
+  description: string
   details: {
     headings: {
       label: string
@@ -46,6 +48,7 @@ type DataProps = {
       'unused-css-rules': ImproveContents
       'unminified-css': ImproveContents
       'unminified-javascript': ImproveContents
+      'server-response-time': ImproveContents
     }
   }
 }

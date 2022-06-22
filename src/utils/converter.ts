@@ -18,7 +18,7 @@ export const hex2rgba = (hex: string, alpha = 1) => {
   return `rgba(${c[0]}, ${c[1]}, ${c[2]}, ${alpha})`
 }
 
-export const convertToKiB = (value: number) => {
+export const convertToKiB = (value: number | undefined) => {
   const kb = 1024
-  return Math.floor((value / kb) * 100) / 100
+  return value ? Math.floor((value / kb) * 100) / 100 : 0
 }
