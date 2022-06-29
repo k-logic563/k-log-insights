@@ -4,7 +4,9 @@ import { getColor } from '@/utils/color'
 import * as types from '@/types'
 import * as constants from '@/constants'
 
-export const axios = Axios.create()
+export const axios = Axios.create({
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+})
 
 axios.interceptors.response.use(
   (response: AxiosResponse<types.api.SuccessResponse['data']>) => {
@@ -20,12 +22,26 @@ axios.interceptors.response.use(
     })
 
     // setTotalScore
-    const fcpScore = data['first-contentful-paint'].score * 100 * 0.1
-    const interactiveScore = data['interactive'].score * 100 * 0.1
-    const siScore = data['speed-index'].score * 100 * 0.1
-    const tbtScore = data['total-blocking-time'].score * 100 * 0.3
-    const lcpScore = data['largest-contentful-paint'].score * 100 * 0.25
-    const clsScore = data['cumulative-layout-shift'].score * 100 * 0.15
+    const fcpScore =
+      data['first-contentful-paint'].score *
+      100 *
+      constants.SCORE_WEIGHT.firstContentfulPaint
+    const interactiveScore =
+      data['interactive'].score * 100 * constants.SCORE_WEIGHT.interactive
+    const siScore =
+      data['speed-index'].score * 100 * constants.SCORE_WEIGHT.speedIndex
+    const tbtScore =
+      data['total-blocking-time'].score *
+      100 *
+      constants.SCORE_WEIGHT.totalBlockingTime
+    const lcpScore =
+      data['largest-contentful-paint'].score *
+      100 *
+      constants.SCORE_WEIGHT.largestContentfulPaint
+    const clsScore =
+      data['cumulative-layout-shift'].score *
+      100 *
+      constants.SCORE_WEIGHT.cumulativeLauoutShift
     const totalScore = Math.round(
       fcpScore + interactiveScore + siScore + tbtScore + lcpScore + clsScore
     )

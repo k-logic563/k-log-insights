@@ -9,7 +9,7 @@ type Props = {
   lighthouseResult: types.api.SuccessResponse['data']['lighthouseResult']
 }
 
-const LighthouseList: React.FC<Props> = ({ lighthouseResult }) => {
+export const LighthouseList: React.FC<Props> = ({ lighthouseResult }) => {
   return (
     <ul css={styles.content.list}>
       {LIGHTHOUSE_ITEMS.map((x, i) => (
@@ -31,5 +31,3 @@ const LighthouseList: React.FC<Props> = ({ lighthouseResult }) => {
     </ul>
   )
 }
-
-export default LighthouseList

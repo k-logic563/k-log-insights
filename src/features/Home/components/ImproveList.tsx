@@ -10,7 +10,7 @@ type Props = {
   results: types.api.SuccessResponse
 }
 
-const ImproveList: React.FC<Props> = ({ results }) => {
+export const ImproveList: React.FC<Props> = ({ results }) => {
   const audits = results.data.lighthouseResult.audits
 
   return (
@@ -64,5 +64,3 @@ const ImproveList: React.FC<Props> = ({ results }) => {
     </>
   )
 }
-
-export default ImproveList

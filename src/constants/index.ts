@@ -1,5 +1,26 @@
 import { SProps } from '../types/form'
 
+export const SCORE_WEIGHT = {
+  firstContentfulPaint: 0.1,
+  interactive: 0.1,
+  speedIndex: 0.1,
+  totalBlockingTime: 0.3,
+  largestContentfulPaint: 0.25,
+  cumulativeLauoutShift: 0.15,
+} as const
+
+export const RHF_OPTIONS = {
+  defaultValues: {
+    strategy: 'desktop' as const,
+    items: [
+      {
+        url: '',
+      },
+    ],
+  },
+  mode: 'onSubmit' as const,
+}
+
 export const LIGHTHOUSE_ITEMS = [
   {
     title: 'First Contentful Paint',

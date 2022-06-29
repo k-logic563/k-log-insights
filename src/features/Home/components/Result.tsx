@@ -1,8 +1,9 @@
 import React from 'react'
 
-import LighthouseList from './LighthouseList'
-import ImproveList from './ImproveList'
-import Score from '../Elements/Score'
+import { LighthouseList } from './LighthouseList'
+import { ImproveList } from './ImproveList'
+import { UrlList } from './UrlList'
+import Score from '@/components/Elements/Score'
 
 import * as types from '@/types'
 import * as styles from '@/styles'
@@ -21,17 +22,7 @@ const isSuccessResponse = (
 export const Result: React.FC<Props> = ({ results, urls }) => {
   return (
     <div css={styles.layout.wrapper}>
-      <nav className="sticky-top">
-        <ul className="list-group">
-          {urls.map((x, i) => (
-            <li className="list-group-item" key={i}>
-              <a className="d-block" href={`#res-${i}`}>
-                {x}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <UrlList urls={urls} />
       <div className="py-5 px-4 bg-white rounded-3">
         <div className="d-grid gap-5">
           {results.map((x, i) =>
