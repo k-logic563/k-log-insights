@@ -1,10 +1,10 @@
-import Axios, { AxiosResponse } from 'axios'
+import Axios, { AxiosResponse, AxiosError } from 'axios'
 
 import { getColor } from '@/utils/color'
 import * as types from '@/types'
 import * as constants from '@/constants'
 
-export const axios = Axios.create({
+const axios = Axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
 })
 
@@ -51,3 +51,5 @@ axios.interceptors.response.use(
     return response
   }
 )
+
+export { axios, AxiosError }

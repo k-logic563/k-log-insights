@@ -2,7 +2,7 @@ import React from 'react'
 
 import { LighthouseList } from './LighthouseList'
 import { ImproveList } from './ImproveList'
-import { UrlList } from './UrlList'
+import { Sidebar } from './Sidebar'
 import Score from '@/components/Elements/Score'
 
 import * as types from '@/types'
@@ -22,39 +22,43 @@ const isSuccessResponse = (
 export const Result: React.FC<Props> = ({ results, urls }) => {
   return (
     <div css={styles.layout.wrapper}>
-      <UrlList urls={urls} />
-      <div className="py-5 px-4 bg-white rounded-3">
-        <div className="d-grid gap-5">
-          {results.map((x, i) =>
-            isSuccessResponse(x) ? (
-              <div key={x.data.id} id={`res-${i}`}>
-                <section>
-                  <h2 className="pb-2 mb-5 border-bottom border-2">
-                    {urls[i]}
-                  </h2>
-                  <Score
-                    score={`${x.data.totalScore}`}
-                    color={x.data.totalScoreColor}
-                  />
-                  <LighthouseList lighthouseResult={x.data.lighthouseResult} />
-                </section>
-                <section>
-                  <h3 className="pb-2 mb-3 border-bottom border-1 fs-4 fw-bold">
-                    改善できる項目
-                  </h3>
-                  <ImproveList results={x} />
-                </section>
-              </div>
-            ) : (
-              <section key={i} id={`res-${i}`}>
-                <h2 className="pb-2 mb-5 border-bottom border-2">{urls[i]}</h2>
-                <p className="text-center text-danger fw-bold text-2xl">
-                  {x.data.error.message}
-                </p>
+      <Sidebar urls={urls} />
+      <div className="d-grid gap-5 bg-white rounded border py-4 px-5">
+        {results.map((x, i) =>
+          isSuccessResponse(x) ? (
+            <div key={x.data.id} id={`res-${i}`}>
+              <section>
+                <h2
+                  className="pb-2 mb-5 border-bottom border-2"
+                  data-testid={`title-${i}`}
+                >
+                  {urls[i]}
+                </h2>
+                <Score
+                  score={`${x.data.totalScore}`}
+                  color={x.data.totalScoreColor}
+                />
+                <LighthouseList lighthouseResult={x.data.lighthouseResult} />
               </section>
-            )
-          )}
-        </div>
+              <section>
+                <h3 className="pb-2 mb-3 border-bottom border-1 fs-4 fw-bold">
+                  改善できる項目
+                </h3>
+                <ImproveList results={x} />
+              </section>
+            </div>
+          ) : (
+            <section key={i} id={`res-${i}`}>
+              <h2 className="pb-2 mb-5 border-bottom border-2">{urls[i]}</h2>
+              <p
+                className="text-center text-danger fw-bold text-2xl"
+                data-testid={`error-text-${i}`}
+              >
+                {x.data.message}
+              </p>
+            </section>
+          )
+        )}
       </div>
     </div>
   )

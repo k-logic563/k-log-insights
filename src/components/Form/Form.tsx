@@ -33,7 +33,9 @@ export const Form = <TFormValues extends Record<string, unknown>>({
 
   return (
     <RBForm onSubmit={methods.handleSubmit(onSubmit)}>
-      {children({ ...methods, ...fieldsArrayProps })}
+      <fieldset disabled={methods.formState.isSubmitting}>
+        {children({ ...methods, ...fieldsArrayProps })}
+      </fieldset>
     </RBForm>
   )
 }

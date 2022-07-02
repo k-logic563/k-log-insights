@@ -29,7 +29,7 @@ type ImproveContents = {
   }
 }
 
-type DataProps = {
+export type DataProps = {
   id: string
   totalScore: number
   totalScoreColor: string
@@ -53,10 +53,8 @@ type DataProps = {
   }
 }
 
-type ErrorDataProps = {
-  error: {
-    message: string
-  }
+export type ErrorDataProps = {
+  message: string
 }
 
 export type SuccessResponse = AxiosResponse<DataProps>

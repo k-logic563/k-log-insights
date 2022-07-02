@@ -25,7 +25,7 @@ const mockData = {
   mode: 'onSubmit' as const,
 }
 
-test('should render and submit a basic Form component', async () => {
+test('基本的なフォームの入力、送信ができる', async () => {
   const handleSubmit = jest.fn()
   render(
     <Form<typeof mockData.defaultValues>
@@ -76,7 +76,7 @@ test('should render and submit a basic Form component', async () => {
   })
 })
 
-describe('should fail submission if validation fails', () => {
+describe('バリデーション', () => {
   const handleSubmit = jest.fn()
   beforeEach(() => {
     render(
@@ -115,7 +115,7 @@ describe('should fail submission if validation fails', () => {
   afterEach(() => {
     cleanup()
   })
-  test('required', async () => {
+  test('必須項目エラーメッセージの出力', async () => {
     await act(() => {
       fireEvent.click(screen.getByRole('button', { name: /分析/i }))
     })
@@ -123,7 +123,7 @@ describe('should fail submission if validation fails', () => {
     expect(handleSubmit).toHaveBeenCalledTimes(0)
   })
 
-  test('check url-format', async () => {
+  test('URLフォーマットエラー出力', async () => {
     const inputEl = (await document.querySelector(
       'input[name="items.0.url"]'
     )) as HTMLInputElement

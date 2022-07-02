@@ -1,12 +1,12 @@
 import React from 'react'
 import { useState, useCallback } from 'react'
 import { NextPage } from 'next'
-import axios from 'axios'
 
 import { Progress } from '@/components/Elements/Progress'
 import { Result } from '@/features/Home/components/Result'
 import { AppForm } from '@/features/Home/components/AppForm'
 
+import { axios, AxiosError } from '@/lib/axios'
 import { useProgress } from '@/hooks/useProgress'
 import { wait } from '@/utils/wait'
 import { RHF_OPTIONS } from '@/constants'
@@ -23,12 +23,12 @@ const Home: NextPage = () => {
     // 初期化処理
     results.length = 0
     setProgressRate(0)
-    setLoading(true)
     setUrls(data.items.map((x) => x.url))
+    setLoading(true)
 
     // apiコール処理を配列に格納
     const promises = data.items.map((x) => {
-      return axios.get(`/api/insight`, {
+      return axios.get('analyse', {
         params: {
           strategy: data.strategy,
           url: x.url,
@@ -38,7 +38,6 @@ const Home: NextPage = () => {
 
     // api配列を並列処理させる
     const res = await progressPromise(promises)
-
     const formatRes = res.map((x) => {
       if (x.status === 'fulfilled') {
         return x.value
@@ -51,23 +50,25 @@ const Home: NextPage = () => {
     setLoading(false)
   }, [])
 
-  return !loading ? (
+  return (
     <>
       <div className="py-5 bg-white">
         <div className="container">
           <AppForm options={RHF_OPTIONS} onSubmit={onSubmit} />
         </div>
       </div>
-      {results.length !== 0 && (
-        <div className="container py-5" data-cy="result">
-          <Result urls={urls} results={results} />
-        </div>
-      )}
+      <div className="container">
+        {loading ? (
+          <Progress now={progressRate} />
+        ) : (
+          results.length !== 0 && (
+            <div className="py-5 px-4">
+              <Result urls={urls} results={results} />
+            </div>
+          )
+        )}
+      </div>
     </>
-  ) : (
-    <div className="container">
-      <Progress now={progressRate} />
-    </div>
   )
 }
 

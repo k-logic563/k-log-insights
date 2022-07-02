@@ -8,7 +8,13 @@ type Props = {
 }
 
 const Score: React.FC<Props> = ({ score, color }) => {
-  return <div css={styles.form.score(score, color)} data-score={score} />
+  return (
+    <div
+      data-testid="score"
+      css={styles.form.score(score, color)}
+      data-score={score}
+    />
+  )
 }
 
 export default Score
