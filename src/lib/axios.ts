@@ -6,6 +6,9 @@ import * as constants from '@/constants'
 
 const axios = Axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+  headers: {
+    'X-Api-Key': `${process.env.NEXT_PUBLIC_AWS_API_KEY}`
+  },
 })
 
 axios.interceptors.response.use(

@@ -54,7 +54,7 @@ export const Result: React.FC<Props> = ({ results, urls }) => {
                 className="text-center text-danger fw-bold text-2xl"
                 data-testid={`error-text-${i}`}
               >
-                {x.data.message}
+                {x.data?.message ?? 'エラーが発生しました'}
               </p>
             </section>
           )

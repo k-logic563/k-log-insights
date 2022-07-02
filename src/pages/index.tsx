@@ -6,7 +6,7 @@ import { Progress } from '@/components/Elements/Progress'
 import { Result } from '@/features/Home/components/Result'
 import { AppForm } from '@/features/Home/components/AppForm'
 
-import { axios, AxiosError } from '@/lib/axios'
+import { axios } from '@/lib/axios'
 import { useProgress } from '@/hooks/useProgress'
 import { wait } from '@/utils/wait'
 import { RHF_OPTIONS } from '@/constants'
