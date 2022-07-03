@@ -28,7 +28,7 @@ const Home: NextPage = () => {
 
     // apiコール処理を配列に格納
     const promises = data.items.map((x) => {
-      return axios.get('analyse', {
+      return axios.get('analyze', {
         params: {
           strategy: data.strategy,
           url: x.url,
