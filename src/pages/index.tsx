@@ -12,8 +12,6 @@ import { wait } from '@/utils/wait'
 import { RHF_OPTIONS } from '@/constants'
 import * as types from '@/types'
 
-const apiPrefix = `${process.env.NEXT_PUBLIC_API_PREFIX}`
-
 const Home: NextPage = () => {
   const [loading, setLoading] = useState(false)
   const [urls, setUrls] = useState<string[]>([])
@@ -30,7 +28,7 @@ const Home: NextPage = () => {
 
     // apiコール処理を配列に格納
     const promises = data.items.map((x) => {
-      return axios.get(apiPrefix, {
+      return axios.get('/api/insights', {
         params: {
           strategy: data.strategy,
           url: x.url,
