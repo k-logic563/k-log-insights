@@ -54,9 +54,7 @@ export type DataProps = {
 }
 
 export type ErrorDataProps = {
-  error: {
-    message: string
-  }
+  error: string
 }
 
 export type SuccessResponse = AxiosResponse<DataProps>

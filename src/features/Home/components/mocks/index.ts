@@ -1,9 +1,7 @@
 export const urls = ['https://iwtttter.tech']
 
 export const errorResponse = {
-  error: {
-    message: 'エラーが発生しました',
-  }
+  error: 'エラーが発生しました'
 }
 
 export const response = {
