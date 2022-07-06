@@ -30,7 +30,7 @@ const Home: NextPage = () => {
 
     // apiコール処理を配列に格納
     const promises = data.items.map((x) => {
-      return axios.get(apiUrl, {
+      return axios.get('api/insights', {
         params: {
           strategy: data.strategy,
           url: x.url,
@@ -46,6 +46,7 @@ const Home: NextPage = () => {
       }
       return x.reason.response
     })
+    console.log(formatRes)
     setResult(formatRes)
     // 処理後余裕を持たせて100%表示をさせる
     await wait(1000)
