@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState, useCallback } from 'react'
 import { NextPage } from 'next'
 
@@ -11,8 +10,6 @@ import { useProgress } from '@/hooks/useProgress'
 import { wait } from '@/utils/wait'
 import { RHF_OPTIONS } from '@/constants'
 import * as types from '@/types'
-
-const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}`
 
 const Home: NextPage = () => {
   const [loading, setLoading] = useState(false)
@@ -46,7 +43,6 @@ const Home: NextPage = () => {
       }
       return x.reason.response
     })
-    console.log(formatRes)
     setResult(formatRes)
     // 処理後余裕を持たせて100%表示をさせる
     await wait(1000)

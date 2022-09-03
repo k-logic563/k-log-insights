@@ -7,14 +7,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint . --ext .ts,.tsx",
-    "lint:format": "prettier --write './src/**/*.{js,jsx,ts,tsx,css,md,json}'",
+    "lint:fix": "eslint . --ext .ts,.tsx",
+    "format": "prettier --write './src/**/*.{js,jsx,ts,tsx,css,md,json}'",
     "test": "jest",
     "prepare": "husky install"
   },
   "lint-staged": {
     "*.{tsx, ts}": [
-      "npm run lint"
+      "npm run lint:fix"
     ]
   },
   "dependencies": {

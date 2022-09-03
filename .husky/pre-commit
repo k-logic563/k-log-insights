@@ -4,3 +4,4 @@
 yarn tsc
 yarn test
 npx lint-staged
+git add -A

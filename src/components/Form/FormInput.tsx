@@ -1,4 +1,3 @@
-import React from 'react'
 import { UseFormRegisterReturn } from 'react-hook-form'
 import { Form } from 'react-bootstrap'
 
