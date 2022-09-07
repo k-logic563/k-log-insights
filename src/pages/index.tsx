@@ -53,6 +53,7 @@ const Home: NextPage = () => {
     <>
       <div className="py-5 bg-white">
         <div className="container">
+          <p className="mb-4 text-center">複数のURLで簡単ページスピード確認できます。<br/><span style={{ fontSize: '.9em' }}>※最大9つのURLを追加できます。</span></p>
           <AppForm options={RHF_OPTIONS} onSubmit={onSubmit} />
         </div>
       </div>

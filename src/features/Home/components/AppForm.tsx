@@ -69,6 +69,7 @@ export const AppForm: React.FC<Props> = ({ options, onSubmit }) => {
                   url: '',
                 })
               }
+              disabled={fields.length === 9}
             />
             <Button type="submit" variant="primary" text="分析" />
           </div>
