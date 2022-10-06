@@ -2,7 +2,7 @@ import { ResponseResolver, MockedRequest, restContext } from 'msw'
 import { response } from '../../mocks'
 
 const get: ResponseResolver<MockedRequest, typeof restContext> = (
-  req,
+  _,
   res,
   ctx
 ) => {
