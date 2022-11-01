@@ -46,7 +46,7 @@ export const AppForm: React.FC<Props> = ({ options, onSubmit }) => {
             </p>
             <div className="mb-3">
               <Button
-                variant="light"
+                variant="secondary"
                 text="追加"
                 handleClick={() =>
                   append({
