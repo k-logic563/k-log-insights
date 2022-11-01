@@ -3,5 +3,7 @@
 
 yarn tsc
 yarn test
+yarn lint:fix
+yarn format
 npx lint-staged
 git add -A

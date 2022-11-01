@@ -23,9 +23,10 @@ export const AppForm: React.FC<Props> = ({ options, onSubmit }) => {
     >
       {({ register, formState, fields, remove, append }) => (
         <>
-          <div className="mb-3">
+          <div className="mb-4">
+            <p>1.&ensp;メディアを選択してください。</p>
             {STRATEGIES.map((x) => (
-              <div className="form-check" key={x.id}>
+              <div className="form-check form-check-inline" key={x.id}>
                 <RBForm.Check
                   {...register('strategy')}
                   type="radio"
@@ -38,9 +39,26 @@ export const AppForm: React.FC<Props> = ({ options, onSubmit }) => {
             ))}
           </div>
           <div className="mb-5">
-            <div className="row g-3">
+            <p>
+              2.&ensp;URLを追加してください。
+              <br />
+              ※追加ボタンでURLを追加できます。
+            </p>
+            <div className="mb-3">
+              <Button
+                variant="light"
+                text="追加"
+                handleClick={() =>
+                  append({
+                    url: '',
+                  })
+                }
+                disabled={fields.length === 9}
+              />
+            </div>
+            <div className="row row-cols-md-3 g-3">
               {fields.map((field, idx) => (
-                <div className="col-4" key={field.id}>
+                <div key={field.id}>
                   <InputField
                     defaultValue={field.url}
                     registration={register(`items.${idx}.url` as const, {
@@ -60,19 +78,7 @@ export const AppForm: React.FC<Props> = ({ options, onSubmit }) => {
               ))}
             </div>
           </div>
-          <div className="d-flex justify-content-center gap-3">
-            <Button
-              variant="outline-primary"
-              text="追加"
-              handleClick={() =>
-                append({
-                  url: '',
-                })
-              }
-              disabled={fields.length === 9}
-            />
-            <Button type="submit" variant="primary" text="分析" />
-          </div>
+          <Button type="submit" variant="primary" text="分析する" />
         </>
       )}
     </Form>

@@ -39,7 +39,7 @@ export const ImproveList: React.FC<Props> = ({ results }) => {
                             x === 'offscreen-images') && (
                             <td>
                               <p>{y.node?.selector}</p>
-                              <Image width={150} src={y.url} alt="" />
+                              <Image fluid src={y.url} alt="" />
                             </td>
                           )}
                           <td>{y.url}</td>

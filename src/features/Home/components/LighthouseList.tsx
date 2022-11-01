@@ -11,7 +11,7 @@ type Props = {
 
 export const LighthouseList: React.FC<Props> = ({ lighthouseResult }) => {
   return (
-    <ul css={styles.content.list}>
+    <ul className="row row-cols-2 row-cols-md-3 list-unstyled">
       {LIGHTHOUSE_ITEMS.map((x, i) => (
         <li key={i}>
           <h3

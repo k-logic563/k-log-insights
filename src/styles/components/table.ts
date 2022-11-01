@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 
-export const table = css({
+export const table = css`
   td: {
-    wordBreak: 'break-all',
-  },
-})
+    word-break: 'break-all';
+  }
+`

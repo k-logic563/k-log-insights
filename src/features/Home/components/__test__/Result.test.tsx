@@ -11,16 +11,10 @@ describe('レンダリング表示', () => {
   afterEach(() => server.resetHandlers())
   afterAll(() => server.close())
 
-  test('URL表示がサイドバー、リストの2つ', async () => {
+  test('URLが表示される', async () => {
     const response = await axios.get<DataProps>('/api/insights')
-    const { getAllByText, getByTestId } = render(
-      <Result urls={urls} results={[response]} />
-    )
-    expect(getByTestId('sidebar-url-0').textContent).toBe(
-      'https://iwtttter.tech'
-    )
+    const { getByTestId } = render(<Result urls={urls} results={[response]} />)
     expect(getByTestId('title-0').textContent).toBe('https://iwtttter.tech')
-    expect(getAllByText('https://iwtttter.tech').length).toBe(2)
   })
 
   test('スコア表示', async () => {

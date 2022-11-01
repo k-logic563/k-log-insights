@@ -2,11 +2,9 @@ import React from 'react'
 
 import { LighthouseList } from './LighthouseList'
 import { ImproveList } from './ImproveList'
-import { Sidebar } from './Sidebar'
 import Score from '@/components/Elements/Score'
 
 import * as types from '@/types'
-import * as styles from '@/styles'
 
 type Props = {
   results: types.api.DataResponses[]
@@ -21,9 +19,8 @@ const isSuccessResponse = (
 
 export const Result: React.FC<Props> = ({ results, urls }) => {
   return (
-    <div css={styles.layout.wrapper}>
-      <Sidebar urls={urls} />
-      <div className="d-grid gap-5 bg-white rounded border py-4 px-5">
+    <div>
+      <div className="d-grid gap-5 bg-white rounded border p-4 px-md-5">
         {results.map((x, i) =>
           isSuccessResponse(x) ? (
             <div key={x.data.id} id={`res-${i}`}>

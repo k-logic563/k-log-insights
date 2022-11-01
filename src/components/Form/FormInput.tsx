@@ -21,6 +21,7 @@ export const InputField = (props: InputFieldProps) => {
           <Form.Control
             type={type}
             defaultValue={props.defaultValue}
+            placeholder="ex) https://iwtttter.tech"
             {...registration}
           />
         </FieldWrapper>

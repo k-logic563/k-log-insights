@@ -2,13 +2,6 @@ import { css } from '@emotion/react'
 
 import { Color } from '@/utils/color'
 
-export const list = css`
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem 1rem;
-`
-
 export const listTitle = (color: string) => css`
   font-size: 16px;
   margin-bottom: 0.5em;

@@ -11,6 +11,8 @@ import { wait } from '@/utils/wait'
 import { RHF_OPTIONS } from '@/constants'
 import * as types from '@/types'
 
+import * as styles from '@/styles'
+
 const Home: NextPage = () => {
   const [loading, setLoading] = useState(false)
   const [urls, setUrls] = useState<string[]>([])
@@ -50,31 +52,24 @@ const Home: NextPage = () => {
   }, [])
 
   return (
-    <>
-      <div className="py-5 bg-white">
+    <div>
+      <div className="py-5 bg-light">
         <div className="container">
-          <p className="mb-4 text-center">
-            複数のURLで簡単ページスピード確認できます。
-            <br />
-            <span style={{ fontSize: '.9em' }}>
-              ※最大9つのURLを追加できます。
-            </span>
-          </p>
           <AppForm options={RHF_OPTIONS} onSubmit={onSubmit} />
         </div>
       </div>
-      <div className="container">
+      <div css={styles.layout.customContainer}>
         {loading ? (
           <Progress now={progressRate} />
         ) : (
           results.length !== 0 && (
-            <div className="py-5 px-4">
+            <div className="py-5">
               <Result urls={urls} results={results} />
             </div>
           )
         )}
       </div>
-    </>
+    </div>
   )
 }
 
