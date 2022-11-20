@@ -1,9 +1,8 @@
 import React from 'react'
-import { Accordion, Table, Image } from 'react-bootstrap'
+import { Accordion, Table, Image, Box, Text } from '@mantine/core'
 
 import * as types from '@/types'
-import * as styles from '@/styles'
-import { IMPROVE_PROPS } from '@/constants'
+import { improveProps } from '@/constants'
 import { convertToKiB } from '@/utils/converter'
 
 type Props = {
@@ -15,15 +14,15 @@ export const ImproveList: React.FC<Props> = ({ results }) => {
 
   return (
     <>
-      <Accordion defaultActiveKey={null}>
-        {IMPROVE_PROPS.map((x, idx) => (
-          <div key={x}>
+      <Accordion>
+        {improveProps.map((x, idx) => (
+          <Box key={x}>
             {!!audits[x].details.items.length && (
-              <Accordion.Item eventKey={`${idx}`}>
-                <Accordion.Header>{audits[x].title}</Accordion.Header>
-                <Accordion.Body>
+              <Accordion.Item value={`item-${idx}`}>
+                <Accordion.Control>{audits[x].title}</Accordion.Control>
+                <Accordion.Panel>
                   <p>{audits[x].description}</p>
-                  <Table css={styles.table.table} striped bordered hover>
+                  <Table striped>
                     <thead>
                       <tr>
                         {audits[x].details.headings.map((y, i) => (
@@ -38,8 +37,8 @@ export const ImproveList: React.FC<Props> = ({ results }) => {
                             x === 'uses-responsive-images' ||
                             x === 'offscreen-images') && (
                             <td>
-                              <p>{y.node?.selector}</p>
-                              <Image fluid src={y.url} alt="" />
+                              <Text>{y.node?.selector}</Text>
+                              <Image src={y.url} alt="" w={120} />
                             </td>
                           )}
                           <td>{y.url}</td>
@@ -55,10 +54,10 @@ export const ImproveList: React.FC<Props> = ({ results }) => {
                       ))}
                     </tbody>
                   </Table>
-                </Accordion.Body>
+                </Accordion.Panel>
               </Accordion.Item>
             )}
-          </div>
+          </Box>
         ))}
       </Accordion>
     </>

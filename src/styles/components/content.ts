@@ -3,9 +3,6 @@ import { css } from '@emotion/react'
 import { Color } from '@/utils/color'
 
 export const listTitle = (color: string) => css`
-  font-size: 16px;
-  margin-bottom: 0.5em;
-
   &::before {
     content: '${color === Color.Danger
       ? '▲'
@@ -15,11 +12,6 @@ export const listTitle = (color: string) => css`
     color: ${color};
     margin-right: 0.2em;
   }
-`
-
-export const listDesc = (color: string) => css`
-  font-size: 24px;
-  color: ${color};
 `
 
 export const accordionHeading = (color: string) => css`

@@ -1,7 +1,5 @@
-export type Strategy = 'desktop' | 'mobile'
-
 export type SProps = {
-  id: Strategy
+  id: string
   label: string
 }
 
@@ -12,7 +10,7 @@ export type Item = {
 }
 
 export type FormValues = {
-  strategy: Strategy
+  strategy: string
   items: {
     url: string
   }[]

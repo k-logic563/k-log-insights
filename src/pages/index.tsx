@@ -1,21 +1,17 @@
 import { useState, useCallback } from 'react'
 import { NextPage } from 'next'
+import { Container, Progress } from '@mantine/core'
 
-import { Progress } from '@/components/Elements/Progress'
 import { Result } from '@/features/Home/components/Result'
 import { AppForm } from '@/features/Home/components/AppForm'
 
 import { axios } from '@/lib/axios'
 import { useProgress } from '@/hooks/useProgress'
 import { wait } from '@/utils/wait'
-import { RHF_OPTIONS } from '@/constants'
 import * as types from '@/types'
-
-import * as styles from '@/styles'
 
 const Home: NextPage = () => {
   const [loading, setLoading] = useState(false)
-  const [urls, setUrls] = useState<string[]>([])
   const [results, setResult] = useState<types.api.DataResponses[]>([])
   const { progressRate, setProgressRate, progressPromise } =
     useProgress<types.api.DataResponses>()
@@ -24,7 +20,6 @@ const Home: NextPage = () => {
     // 初期化処理
     results.length = 0
     setProgressRate(0)
-    setUrls(data.items.map((x) => x.url))
     setLoading(true)
 
     // apiコール処理を配列に格納
@@ -53,22 +48,22 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      <div className="py-5 bg-light">
-        <div className="container">
-          <AppForm options={RHF_OPTIONS} onSubmit={onSubmit} />
-        </div>
-      </div>
-      <div css={styles.layout.customContainer}>
+      <Container size="xs">
+        <AppForm onSubmit={onSubmit} />
+      </Container>
+      <Container py={52} size="sm">
         {loading ? (
-          <Progress now={progressRate} />
+          <Progress
+            data-test-id="cy-progress"
+            value={progressRate}
+            size="lg"
+            striped
+            animate
+          />
         ) : (
-          results.length !== 0 && (
-            <div className="py-5">
-              <Result urls={urls} results={results} />
-            </div>
-          )
+          results.length !== 0 && <Result results={results} />
         )}
-      </div>
+      </Container>
     </div>
   )
 }

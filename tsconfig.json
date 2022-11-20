@@ -30,9 +30,7 @@
     },
     "types": [
       "@emotion/react/types/css-prop",
-      "jest",
       "node",
-      "@testing-library/jest-dom"
     ]
   },
   "include": [

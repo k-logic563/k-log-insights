@@ -1,4 +1,5 @@
 import React from 'react'
+import { Box } from '@mantine/core'
 
 import * as styles from '@/styles'
 
@@ -9,7 +10,7 @@ type Props = {
 
 const Score: React.FC<Props> = ({ score, color }) => {
   return (
-    <div
+    <Box
       data-testid="score"
       css={styles.form.score(score, color)}
       data-score={score}

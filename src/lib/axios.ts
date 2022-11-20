@@ -8,7 +8,7 @@ axios.interceptors.response.use(
   (response: AxiosResponse<types.api.SuccessResponse['data']>) => {
     const data = response.data.lighthouseResult.audits
     // set colors
-    constants.LIGHTHOUSE_KEYS.forEach((x) => {
+    constants.lighthouseKeys.forEach((x) => {
       let targetScore = 0
       targetScore = data[x].numericValue / 1000
       if (x === 'cumulative-layout-shift') {
@@ -21,23 +21,23 @@ axios.interceptors.response.use(
     const fcpScore =
       data['first-contentful-paint'].score *
       100 *
-      constants.SCORE_WEIGHT.firstContentfulPaint
+      constants.scoreWeight.firstContentfulPaint
     const interactiveScore =
-      data['interactive'].score * 100 * constants.SCORE_WEIGHT.interactive
+      data['interactive'].score * 100 * constants.scoreWeight.interactive
     const siScore =
-      data['speed-index'].score * 100 * constants.SCORE_WEIGHT.speedIndex
+      data['speed-index'].score * 100 * constants.scoreWeight.speedIndex
     const tbtScore =
       data['total-blocking-time'].score *
       100 *
-      constants.SCORE_WEIGHT.totalBlockingTime
+      constants.scoreWeight.totalBlockingTime
     const lcpScore =
       data['largest-contentful-paint'].score *
       100 *
-      constants.SCORE_WEIGHT.largestContentfulPaint
+      constants.scoreWeight.largestContentfulPaint
     const clsScore =
       data['cumulative-layout-shift'].score *
       100 *
-      constants.SCORE_WEIGHT.cumulativeLauoutShift
+      constants.scoreWeight.cumulativeLauoutShift
     const totalScore = Math.round(
       fcpScore + interactiveScore + siScore + tbtScore + lcpScore + clsScore
     )

@@ -1,6 +1,6 @@
 import { SProps } from '../types/form'
 
-export const SCORE_WEIGHT = {
+export const scoreWeight = {
   firstContentfulPaint: 0.1,
   interactive: 0.1,
   speedIndex: 0.1,
@@ -9,19 +9,7 @@ export const SCORE_WEIGHT = {
   cumulativeLauoutShift: 0.15,
 } as const
 
-export const RHF_OPTIONS = {
-  defaultValues: {
-    strategy: 'desktop' as const,
-    items: [
-      {
-        url: '',
-      },
-    ],
-  },
-  mode: 'onSubmit' as const,
-}
-
-export const LIGHTHOUSE_ITEMS = [
+export const lighthouseItems = [
   {
     title: 'First Contentful Paint',
     prop: 'first-contentful-paint',
@@ -48,9 +36,9 @@ export const LIGHTHOUSE_ITEMS = [
   },
 ] as const
 
-export const LIGHTHOUSE_KEYS = LIGHTHOUSE_ITEMS.map((x) => x.prop)
+export const lighthouseKeys = lighthouseItems.map((x) => x.prop)
 
-export const STRATEGIES: SProps[] = [
+export const strategies: SProps[] = [
   {
     id: 'desktop',
     label: 'デスクトップ',
@@ -61,9 +49,9 @@ export const STRATEGIES: SProps[] = [
   },
 ]
 
-export const URL_REGEX = /^(http|https)(:\/\/[\w\/:%#\$&\?\(\)~\.=\+\-]+)\..+$/
+export const urlRegex = /^(http|https)(:\/\/[\w\/:%#\$&\?\(\)~\.=\+\-]+)\..+$/
 
-export const IMPROVE_PROPS = [
+export const improveProps = [
   'server-response-time',
   'modern-image-formats',
   'uses-responsive-images',

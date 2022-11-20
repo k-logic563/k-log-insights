@@ -1,4 +1,5 @@
 import React from 'react'
+import { Box, Title, Text, Grid, Paper } from '@mantine/core'
 
 import { LighthouseList } from './LighthouseList'
 import { ImproveList } from './ImproveList'
@@ -8,7 +9,6 @@ import * as types from '@/types'
 
 type Props = {
   results: types.api.DataResponses[]
-  urls: string[]
 }
 
 const isSuccessResponse = (
@@ -17,46 +17,46 @@ const isSuccessResponse = (
   return data.status === 200
 }
 
-export const Result: React.FC<Props> = ({ results, urls }) => {
+export const Result: React.FC<Props> = ({ results }) => {
   return (
-    <div>
-      <div className="d-grid gap-5 bg-white rounded border p-4 px-md-5">
-        {results.map((x, i) =>
-          isSuccessResponse(x) ? (
-            <div key={x.data.id} id={`res-${i}`}>
-              <section>
-                <h2
-                  className="pb-2 mb-5 border-bottom border-2"
-                  data-testid={`title-${i}`}
-                >
-                  {urls[i]}
-                </h2>
+    <Grid gutter={32}>
+      {results.map((x, i) =>
+        isSuccessResponse(x) ? (
+          <Grid.Col key={x.data.id}>
+            <Paper shadow="md" py="lg" px="xl" withBorder>
+              <Title
+                data-test-id={`cy-title-${i}`}
+                align="center"
+                order={2}
+                mb="1em"
+              >
+                {x.data.id}
+              </Title>
+              <Box mb={32}>
                 <Score
                   score={`${x.data.totalScore}`}
                   color={x.data.totalScoreColor}
                 />
+              </Box>
+              <Box mb={48}>
                 <LighthouseList lighthouseResult={x.data.lighthouseResult} />
-              </section>
-              <section>
-                <h3 className="pb-2 mb-3 border-bottom border-1 fs-4 fw-bold">
-                  改善できる項目
-                </h3>
-                <ImproveList results={x} />
-              </section>
-            </div>
-          ) : (
-            <section key={i} id={`res-${i}`}>
-              <h2 className="pb-2 mb-5 border-bottom border-2">{urls[i]}</h2>
-              <p
-                className="text-center text-danger fw-bold text-2xl"
-                data-testid={`error-text-${i}`}
-              >
+              </Box>
+              <Title order={3} mb="1em">
+                改善できる項目
+              </Title>
+              <ImproveList results={x} />
+            </Paper>
+          </Grid.Col>
+        ) : (
+          <Grid.Col key={i}>
+            <Paper shadow="md" py="lg" px="xl" withBorder>
+              <Text color="red" align="center">
                 {x.data?.error?.message ?? 'エラーが発生しました'}
-              </p>
-            </section>
-          )
-        )}
-      </div>
-    </div>
+              </Text>
+            </Paper>
+          </Grid.Col>
+        )
+      )}
+    </Grid>
   )
 }
