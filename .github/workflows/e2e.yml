@@ -9,6 +9,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Install fonts-noto
+        run: sudo apt install fonts-noto
+
       - name: Start App
         run: |
           yarn
