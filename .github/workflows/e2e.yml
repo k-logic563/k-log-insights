@@ -19,14 +19,13 @@ jobs:
         with:
           wait-on: "http://localhost:3000"
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/download-artifact@v3
         if: failure()
         with:
           name: cypress-screenshots
-          path: ./cypress/screenshots
-      - uses: actions/upload-artifact@v2
-
+          path: /Users/k-logi24/Downloads
+      - uses: actions/download-artifact@v3
         if: failure()
         with:
           name: cypress-videos
-          path: ./cypress/videos
+          path: /Users/k-logi24/Downloads
