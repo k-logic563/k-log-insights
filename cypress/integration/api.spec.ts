@@ -1,4 +1,4 @@
-describe ('apiを叩きコンテンツ表示させる', () => {
+it ('apiを叩きコンテンツ表示させる', () => {
   cy.visit('/')
   cy.intercept('GET', '/api/insights?strategy=desktop&url=https:%2F%2Fexample.com').as('getInsights')
   cy.findByTestId("cy-input-0").type('https://example.com')
