@@ -1,14 +1,9 @@
 import React from 'react'
-import {
-  AppShell,
-  Header,
-  Footer,
-  Text,
-  Flex,
-  Title,
-  ActionIcon,
-} from '@mantine/core'
-import { IconBrandGithub } from '@tabler/icons'
+import { AppShell, Navbar } from '@mantine/core'
+
+import { AppHeader } from './AppHeader'
+import { AppForm } from '@/features/Home/components/AppForm'
+import { AppFooter } from './AppFooter'
 
 type Props = {
   children: React.ReactNode
@@ -17,29 +12,22 @@ type Props = {
 export const MainLayout: React.FC<Props> = ({ children }) => {
   return (
     <AppShell
-      padding="lg"
-      header={
-        <Header height={70} py="sm" px="lg">
-          <Flex justify="space-between" align="center">
-            <Title order={1}>k-log-insights</Title>
-            <ActionIcon
-              variant="subtle"
-              component="a"
-              href="https://github.com/k-logic563/k-log-insights"
-              target="_blank"
-            >
-              <IconBrandGithub size={24} />
-            </ActionIcon>
-          </Flex>
-        </Header>
+      padding="xl"
+      styles={(theme) => ({
+        main: {
+          backgroundColor:
+            theme.colorScheme === 'dark'
+              ? theme.colors.dark[8]
+              : theme.colors.gray[0],
+        },
+      })}
+      header={<AppHeader />}
+      navbar={
+        <Navbar width={{ base: 360 }} p="lg">
+          <AppForm />
+        </Navbar>
       }
-      footer={
-        <Footer height={50} p="sm">
-          <Text size={12} align="center">
-            &copy; {new Date().getFullYear()} k-log-insights
-          </Text>
-        </Footer>
-      }
+      footer={<AppFooter />}
     >
       {children}
     </AppShell>

@@ -1,8 +1,10 @@
-import { useState } from 'react'
 import { AxiosResponse, AxiosError } from 'axios'
+import { useSetAtom } from 'jotai'
+
+import { progressStateAtom } from '@/store'
 
 export const useProgress = <T extends AxiosResponse | AxiosError>() => {
-  const [progressRate, setProgressRate] = useState(0)
+  const setProgressState = useSetAtom(progressStateAtom)
 
   const progressPromise = (promises: Promise<T>[]) => {
     const len = promises.length
@@ -11,7 +13,7 @@ export const useProgress = <T extends AxiosResponse | AxiosError>() => {
     function tick(promise: Promise<T>) {
       promise.then(() => {
         progress++
-        setProgressRate(Math.round((progress / len) * 100))
+        setProgressState(Math.round((progress / len) * 100))
       })
       return promise
     }
@@ -21,7 +23,5 @@ export const useProgress = <T extends AxiosResponse | AxiosError>() => {
 
   return {
     progressPromise,
-    progressRate,
-    setProgressRate,
   }
 }

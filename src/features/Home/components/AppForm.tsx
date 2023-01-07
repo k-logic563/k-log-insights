@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import axios from 'axios'
 import { useForm, useFieldArray } from 'react-hook-form'
 import {
   Box,
@@ -8,18 +8,28 @@ import {
   Flex,
   Center,
   Text,
+  Space,
 } from '@mantine/core'
 import { IconTrash, IconPlus } from '@tabler/icons'
+import { useAtom, useSetAtom } from 'jotai'
 
+import { useProgress } from '@/hooks/useProgress'
+import { wait } from '@/utils/wait'
+import {
+  resultsAtom,
+  loadingStateAtom,
+  strategyStateAtom,
+  progressStateAtom,
+} from '@/store'
 import { strategies, urlRegex } from '@/constants'
 import * as types from '@/types'
 
-type Props = {
-  onSubmit: (data: types.form.FormValues) => void
-}
-
-export const AppForm: React.FC<Props> = ({ onSubmit }) => {
-  const [strategy, setStrategy] = useState('desktop')
+export const AppForm = () => {
+  const { progressPromise } = useProgress<types.api.DataResponses>()
+  const setResults = useSetAtom(resultsAtom)
+  const setLoadingState = useSetAtom(loadingStateAtom)
+  const setProgressState = useSetAtom(progressStateAtom)
+  const [strategy, setStrategyState] = useAtom(strategyStateAtom)
 
   const { control, register, formState, setValue, handleSubmit } =
     useForm<types.form.FormValues>({
@@ -40,14 +50,44 @@ export const AppForm: React.FC<Props> = ({ onSubmit }) => {
   })
 
   const handleSetStrategy = (value: string) => {
-    setStrategy(value)
+    setStrategyState(value)
     setValue('strategy', value)
+  }
+
+  const onSubmit = async (data: types.form.FormValues) => {
+    // 初期化処理
+    setResults([])
+    setProgressState(0)
+    setLoadingState(true)
+
+    // apiコール処理を配列に格納
+    const promises = data.items.map((x) => {
+      return axios.get('api/insights', {
+        params: {
+          strategy: data.strategy,
+          url: x.url,
+        },
+      })
+    })
+
+    // api配列を並列処理させる
+    const res = await progressPromise(promises)
+    const formatRes = res.map((x) => {
+      if (x.status === 'fulfilled') {
+        return x.value
+      }
+      return x.reason.response
+    })
+    setResults(formatRes)
+    // 処理後余裕を持たせて100%表示をさせる
+    await wait(1000)
+    setLoadingState(false)
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Box mb={24}>
-        <Text>メディアを選択してください</Text>
+      <Box>
+        <Text fw="bold">メディアを選択してください</Text>
         <Radio.Group
           name="strategy"
           value={strategy}
@@ -58,8 +98,11 @@ export const AppForm: React.FC<Props> = ({ onSubmit }) => {
           ))}
         </Radio.Group>
       </Box>
+      <Space h="lg" />
       <Box>
-        <Text mb={10}>urlを入力してください</Text>
+        <Text mb={16} fw="bold">
+          urlを入力してください
+        </Text>
         <Box
           sx={{
             display: 'grid',
