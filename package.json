@@ -7,11 +7,17 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint:fix": "eslint . --ext .ts,.tsx",
-    "format": "prettier --write './src/**/*.{js,jsx,ts,tsx,css,md,json}'",
+    "lint:fix": "next lint --fix",
+    "format": "prettier --write ./src/.",
+    "checker": "npm-s tsc lint:fix format",
     "prepare": "husky install",
     "cy:open": "cypress open",
     "cy:run": "cypress run"
+  },
+  "lint-staged": {
+    "*.{tsx,ts,js}": [
+      "bash -c 'npm run checker'"
+    ]
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -48,6 +54,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-react": "^7.29.4",
     "husky": "^7.0.4",
+    "lint-staged": "^13.2.0",
     "prettier": "^2.6.2",
     "ts-node": "^10.7.0",
     "typescript": "4.6.4"
