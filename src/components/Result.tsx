@@ -1,9 +1,9 @@
-import React from 'react'
 import { Box, Title, Text, Grid, Paper } from '@mantine/core'
+import React from 'react'
 
-import { LighthouseList } from './LighthouseList'
-import { ImproveList } from './ImproveList'
-import Score from '@/components/Elements/Score'
+import { ImproveList } from './List/ImproveList'
+import { LighthouseList } from './List/LighthouseList'
+import { Score } from './Score'
 
 import * as types from '@/types'
 

@@ -1,9 +1,10 @@
-import React from 'react'
 import { AppShell, Navbar } from '@mantine/core'
+import React from 'react'
 
-import { AppHeader } from './AppHeader'
-import { AppForm } from '@/features/Home/components/AppForm'
 import { AppFooter } from './AppFooter'
+import { AppHeader } from './AppHeader'
+
+import { AppForm } from '@/components/Form/AppForm'
 
 type Props = {
   children: React.ReactNode

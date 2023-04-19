@@ -1,8 +1,8 @@
-import React from 'react'
 import { Accordion, Table, Image, Box, Text } from '@mantine/core'
+import React from 'react'
 
-import * as types from '@/types'
 import { improveProps } from '@/constants'
+import * as types from '@/types'
 import { convertToKiB } from '@/utils/converter'
 
 type Props = {

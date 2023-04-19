@@ -1,5 +1,5 @@
-import React from 'react'
 import { Box } from '@mantine/core'
+import React from 'react'
 
 import * as styles from '@/styles'
 
@@ -8,7 +8,7 @@ type Props = {
   color: string
 }
 
-const Score: React.FC<Props> = ({ score, color }) => {
+export const Score: React.FC<Props> = ({ score, color }) => {
   return (
     <Box
       data-testid="score"
@@ -17,5 +17,3 @@ const Score: React.FC<Props> = ({ score, color }) => {
     />
   )
 }
-
-export default Score

@@ -9,7 +9,7 @@
     "start": "next start",
     "lint:fix": "next lint --fix",
     "format": "prettier --write ./src/.",
-    "checker": "npm-s tsc lint:fix format",
+    "checker": "run-s tsc lint:fix format",
     "prepare": "husky install",
     "cy:open": "cypress open",
     "cy:run": "cypress run"
@@ -52,7 +52,9 @@
     "eslint": "^8.14.0",
     "eslint-config-next": "12.1.5",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-unused-imports": "^2.0.0",
     "husky": "^7.0.4",
     "lint-staged": "^13.2.0",
     "prettier": "^2.6.2",

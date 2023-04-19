@@ -1,10 +1,9 @@
-import React from 'react'
 import { Grid, Text } from '@mantine/core'
+import React from 'react'
 
 import { lighthouseItems } from '@/constants'
-
-import * as types from '@/types'
 import * as styles from '@/styles'
+import * as types from '@/types'
 
 type Props = {
   lighthouseResult: types.api.SuccessResponse['data']['lighthouseResult']

@@ -1,5 +1,5 @@
-import React from 'react'
 import { Footer, Text } from '@mantine/core'
+import React from 'react'
 
 export const AppFooter = () => {
   return (

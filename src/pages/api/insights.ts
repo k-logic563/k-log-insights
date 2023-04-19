@@ -1,5 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
 import { AxiosError } from 'axios'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { axios } from '@/lib/axios'
 import * as types from '@/types'

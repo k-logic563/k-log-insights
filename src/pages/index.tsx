@@ -1,9 +1,8 @@
-import { NextPage } from 'next'
 import { Progress } from '@mantine/core'
 import { useAtomValue } from 'jotai'
+import { NextPage } from 'next'
 
-import { Result } from '@/features/Home/components/Result'
-
+import { Result } from '@/components'
 import { loadingStateAtom, progressStateAtom, resultsAtom } from '@/store'
 
 const Home: NextPage = () => {

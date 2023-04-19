@@ -1,8 +1,8 @@
 import axios, { AxiosResponse, AxiosError } from 'axios'
 
-import { getColor } from '@/utils/color'
-import * as types from '@/types'
 import * as constants from '@/constants'
+import * as types from '@/types'
+import { getColor } from '@/utils/color'
 
 axios.interceptors.response.use(
   (response: AxiosResponse<types.api.SuccessResponse['data']>) => {

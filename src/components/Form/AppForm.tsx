@@ -1,5 +1,3 @@
-import axios from 'axios'
-import { useForm, useFieldArray } from 'react-hook-form'
 import {
   Box,
   Radio,
@@ -11,18 +9,20 @@ import {
   Space,
 } from '@mantine/core'
 import { IconTrash, IconPlus } from '@tabler/icons'
+import axios from 'axios'
 import { useAtom, useSetAtom } from 'jotai'
+import { useForm, useFieldArray } from 'react-hook-form'
 
+import { strategies, urlRegex } from '@/constants'
 import { useProgress } from '@/hooks/useProgress'
-import { wait } from '@/utils/wait'
 import {
   resultsAtom,
   loadingStateAtom,
   strategyStateAtom,
   progressStateAtom,
 } from '@/store'
-import { strategies, urlRegex } from '@/constants'
 import * as types from '@/types'
+import { wait } from '@/utils/wait'
 
 export const AppForm = () => {
   const { progressPromise } = useProgress<types.api.DataResponses>()
